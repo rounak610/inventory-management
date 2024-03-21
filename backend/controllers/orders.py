@@ -17,15 +17,14 @@ class OrdersData(BaseModel):
 
 @router.post("/issue_item")
 def issue_item(data: OrdersData):
-    print(data.item_name)
     item = db.session.query(Item).filter(func.lower(Item.item_name) == data.item_name.lower()).first()
     if item is None:
-        raise HTTPException(status_code=404, detail="Item not found")
+        raise HTTPException(status_code=404, detail="Item not found in database.")
     else:
         if item.status == True:
             order_id = item.order_id
             order = db.session.query(Order).filter(Order.id == order_id).first()
-            raise HTTPException(status_code=404, detail=f"Item already issued by {order.student_name} (ID: {order.student_id}) on {order.issue_date}")
+            raise HTTPException(status_code=408, detail=f"Item already issued to {order.student_name} (ID: {order.student_id}) on {order.issue_date}")
         else:
             order = Order(item_id=item.item_id, student_id=data.student_id, student_name=data.student_name, issue_date=datetime.now())
             db.session.add(order)
