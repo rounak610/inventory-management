@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// Function to fetch item by name
 const baseUrl = "http://localhost:3000";
 
 // Function to get item by name

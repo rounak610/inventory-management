@@ -1,0 +1,3 @@
+db_user_name: postgres
+db_user_password: new_password
+db_name: inventory_management

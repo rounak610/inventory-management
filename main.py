@@ -2,11 +2,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_sqlalchemy import DBSessionMiddleware
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from backend.models.base_model import DBBaseModel
+import yaml
 
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:new_password@localhost/inventory_management"
+
+with open("config.yaml", "r") as f:
+    config = yaml.safe_load(f)
+
+db_user_name = config["db_user_name"]
+db_user_password = config["db_user_password"]
+db_name = config["db_name"]
+SQLALCHEMY_DATABASE_URL = f"postgresql://{db_user_name}:{db_user_password}@localhost/{db_name}"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
