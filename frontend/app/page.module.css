@@ -119,12 +119,21 @@
   padding-left: 31%;
 }
 
+
+.subHeading {
+  color: white;
+  text-align: left;
+  padding-top: 25px;
+  padding-left: 40%; /* Adjust as needed */
+  margin-bottom: 15px;
+}
+
 .formContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  width: 108%; /* Add this line */
+  width: 93.5%; /* Add this line */
 }
 
 .searchInput {
@@ -166,6 +175,8 @@
 .errorMessage {
   color: red;
   margin-top: 10px;
+  margin-left: 30%;
+  margin-right: auto;
 }
 
 .itemDetails {
@@ -174,7 +185,53 @@
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 100%;
+  max-width: 600px; /* Adjust the maximum width as needed */
+  margin-left: 30%;
+  margin-right: auto;
 }
+
+.issueForm {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.issueInput {
+  width: calc(33.33% - 10px); /* Adjust the width as needed */
+  margin-right: 10px; /* Add margin between inputs */
+  margin-bottom: 10px; /* Add margin bottom to separate rows */
+}
+
+.issueButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.issueButton:hover {
+  background-color: #0056b3;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745; /* Green background color */
+  color: #fff; /* White text color */
+  padding: 10px 20px; /* Padding around the notification */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Drop shadow */
+  z-index: 999; /* Ensure the notification stays on top */
+}
+
 
 .logo {
   position: relative;
