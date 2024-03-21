@@ -19,9 +19,9 @@ def add_item(item_data:ItemData):
     db.session.commit()
     return {"message": "Item created successfully"}
 
-@router.get("/fetch_item_by_id/{item_id}")
-def fetch_item_by_id(item_id: str):
-    item = db.session.query(Item).filter(Item.item_id == item_id).first()
+@router.get("/fetch_item_by_name/{item_name}")
+def fetch_item_by_id(item_name: str):
+    item = db.session.query(Item).filter(Item.item_name == item_name).first()
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
     else:
