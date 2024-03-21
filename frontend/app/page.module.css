@@ -119,7 +119,6 @@
   padding-left: 31%;
 }
 
-
 .subHeading {
   color: white;
   text-align: left;
@@ -165,7 +164,6 @@
 .searchButton {
   background-color: #007bff;
   color: #fff;
-  
 }
 
 .orderButton {
@@ -255,7 +253,6 @@
 .buttonContainer {
   margin-top: 10px; /* Adjust margin as needed */
 }
-
 
 .logo {
   position: relative;
