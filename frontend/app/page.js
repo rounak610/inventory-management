@@ -178,6 +178,8 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <div style={{ marginTop: "15px" }}></div>
+
       <h1 className={styles.heading}>Inventory Management System</h1>
 
       <h2 className={styles.subHeading}>Find Items</h2>
@@ -190,7 +192,11 @@ export default function Home() {
           onChange={handleChange}
         />
         <div className={styles.buttonContainer}>
-          <button className={styles.searchButton} onClick={handleSearch}>
+          <button
+            className={styles.searchButton}
+            onClick={handleSearch}
+            disabled={!searchTerm}
+          >
             Search
           </button>
           <button
@@ -239,7 +245,11 @@ export default function Home() {
           onChange={(e) => setStudentNameInput(e.target.value)}
         />
         <div className={styles.buttonContainer}>
-          <button className={styles.orderButton} onClick={handleIssueItem}>
+          <button
+            className={styles.orderButton}
+            onClick={handleIssueItem}
+            disabled={!studentIdInput || !studentNameInput || !itemNameInput}
+          >
             Issue Item
           </button>
         </div>
@@ -272,7 +282,15 @@ export default function Home() {
           onChange={(e) => setStudentReturnNameInput(e.target.value)}
         />
         <div className={styles.buttonContainer}>
-          <button className={styles.orderButton} onClick={handleReturnItem}>
+          <button
+            className={styles.orderButton}
+            onClick={handleReturnItem}
+            disabled={
+              !studentReturnIdInput ||
+              !studentReturnNameInput ||
+              !itemReturnNameInput
+            }
+          >
             Return Item
           </button>
         </div>
@@ -299,7 +317,11 @@ export default function Home() {
           onChange={(e) => setItemName(e.target.value)}
         />
         <div className={styles.buttonContainer}>
-          <button className={styles.orderButton} onClick={addNewItem}>
+          <button
+            className={styles.orderButton}
+            onClick={addNewItem}
+            disabled={!itemId || !itemName}
+          >
             Add New Item
           </button>
         </div>
@@ -326,7 +348,11 @@ export default function Home() {
           onChange={(e) => setOldItemName(e.target.value)}
         />
         <div className={styles.buttonContainer}>
-          <button className={styles.orderButton} onClick={handleUpdateItem}>
+          <button
+            className={styles.orderButton}
+            onClick={handleUpdateItem}
+            disabled={!newItemName || !oldItemName}
+          >
             Update Item
           </button>
         </div>
@@ -353,14 +379,19 @@ export default function Home() {
           onChange={(e) => setDeleteItemID(e.target.value)}
         />
         <div className={styles.buttonContainer}>
-          <button className={styles.orderButton} onClick={handleDeleteItem}>
-            Update Item
+          <button
+            className={styles.orderButton}
+            onClick={handleDeleteItem}
+            disabled={!deleteItemID || !deleteItemName}
+          >
+            Delete Item
           </button>
         </div>
         {notificationVisible && (
           <div className={styles.notification}>{notificationMessage}</div>
         )}
       </div>
+
       <div style={{ marginTop: "15px", marginBottom: "30px" }}></div>
     </div>
   );
