@@ -8,7 +8,7 @@ import {
   returnItem,
   createItem,
   updateItem,
-  deleteItem
+  deleteItem,
 } from "@/pages/api/DashboardService";
 
 export default function Home() {
@@ -37,10 +37,10 @@ export default function Home() {
   const [deleteItemName, setDeleteItemName] = useState("");
 
   const handleDeleteItem = async () => {
-    try{
+    try {
       const data = {
         item_id: deleteItemID,
-        item_name: deleteItemName
+        item_name: deleteItemName,
       };
       await deleteItem(data);
       setNotificationMessage("Item deleted successfully!");
@@ -61,10 +61,10 @@ export default function Home() {
   };
 
   const handleUpdateItem = async () => {
-    try{
+    try {
       const data = {
         old_item_name: oldItemName,
-        new_item_name: newItemName
+        new_item_name: newItemName,
       };
       await updateItem(data);
       setNotificationMessage("Item updated successfully!");
@@ -85,10 +85,10 @@ export default function Home() {
   };
 
   const addNewItem = async () => {
-    try{
+    try {
       const data = {
         item_name: itemName,
-        item_id: itemId
+        item_id: itemId,
       };
       console.log(data);
       await createItem(data);
@@ -287,7 +287,7 @@ export default function Home() {
           type="text"
           className={styles.searchInput}
           placeholder="Enter Item ID"
-          style={{ marginRight: '10px' }}
+          style={{ marginRight: "10px" }}
           value={itemId}
           onChange={(e) => setItemId(e.target.value)}
         />
@@ -314,7 +314,7 @@ export default function Home() {
           type="text"
           className={styles.searchInput}
           placeholder="Enter new name of the item..."
-          style={{ marginRight: '10px' }}
+          style={{ marginRight: "10px" }}
           value={newItemName}
           onChange={(e) => setNewItemName(e.target.value)}
         />
@@ -326,7 +326,7 @@ export default function Home() {
           onChange={(e) => setOldItemName(e.target.value)}
         />
         <div className={styles.buttonContainer}>
-          <button className={styles.orderButton} onClick={handleUpdateItem} >
+          <button className={styles.orderButton} onClick={handleUpdateItem}>
             Update Item
           </button>
         </div>
@@ -334,14 +334,14 @@ export default function Home() {
           <div className={styles.notification}>{notificationMessage}</div>
         )}
       </div>
-      
+
       <h2 className={styles.subHeading}>Delete Item</h2>
       <div className={styles.issueForm}>
         <input
           type="text"
           className={styles.searchInput}
           placeholder="Enter name of the item"
-          style={{ marginRight: '10px' }}
+          style={{ marginRight: "10px" }}
           value={deleteItemName}
           onChange={(e) => setDeleteItemName(e.target.value)}
         />
@@ -353,7 +353,7 @@ export default function Home() {
           onChange={(e) => setDeleteItemID(e.target.value)}
         />
         <div className={styles.buttonContainer}>
-          <button className={styles.orderButton} onClick={handleDeleteItem} >
+          <button className={styles.orderButton} onClick={handleDeleteItem}>
             Update Item
           </button>
         </div>
@@ -361,7 +361,7 @@ export default function Home() {
           <div className={styles.notification}>{notificationMessage}</div>
         )}
       </div>
-      <div style={{ marginTop: '15px', marginBottom:'30px' }}></div>
+      <div style={{ marginTop: "15px", marginBottom: "30px" }}></div>
     </div>
   );
 }
