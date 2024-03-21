@@ -3,6 +3,7 @@ import axios from 'axios';
 // Function to fetch item by name
 const baseUrl = "http://localhost:3000";
 
+// Function to get item by name
 export const fetchItemByName = async (itemName) => {
   try {
     const response = await axios.get(`${baseUrl}/items/fetch_item_by_name/${itemName}`);
