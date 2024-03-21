@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi_sqlalchemy import DBSessionMiddleware
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -9,13 +10,19 @@ SQLALCHEMY_DATABASE_URL = "postgresql://postgres:new_password@localhost/inventor
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-
 from backend.controllers.items import router as item_router
 from backend.controllers.orders import router as order_router
 
 app = FastAPI()
-app.add_middleware(DBSessionMiddleware, db_url=SQLALCHEMY_DATABASE_URL)
 
+app.add_middleware(DBSessionMiddleware, db_url=SQLALCHEMY_DATABASE_URL)
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(item_router, prefix="/items")
 app.include_router(order_router, prefix="/orders")
@@ -24,5 +31,5 @@ app.include_router(order_router, prefix="/orders")
 def read_root():
     return "Server is running....."
 
-# # __________________TO RUN____________________________
-# # uvicorn main:app --host 0.0.0.0 --port 3000 --reload
+# ---------------------To run-------------------------
+# uvicorn main:app --host 0.0.0.0 --port 3000 --reload
