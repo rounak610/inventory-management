@@ -13,10 +13,20 @@ export const fetchItemByName = async (itemName) => {
   }
 };
 
-// Function to update an item
-export const updateItem = async (itemId, itemData) => {
+// Function to create an item
+export const createItem = async (itemData) => {
   try {
-    const response = await axios.post(`${baseUrl}/items/update_item/${itemId}`, itemData);
+    const response = await axios.post(`${baseUrl}/items/create_item`, itemData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Function to update an item
+export const updateItem = async (itemData) => {
+  try {
+    const response = await axios.post(`${baseUrl}/items/update_item`, itemData);
     return response.data;
   } catch (error) {
     throw error;
@@ -24,9 +34,9 @@ export const updateItem = async (itemId, itemData) => {
 };
 
 // Function to delete an item
-export const deleteItem = async (itemId) => {
+export const deleteItem = async (itemData) => {
   try {
-    const response = await axios.delete(`${baseUrl}/items/delete_item/${itemId}`);
+    const response = await axios.post(`${baseUrl}/items/delete_item`, itemData);
     return response.data;
   } catch (error) {
     throw error;
