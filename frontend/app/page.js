@@ -188,7 +188,7 @@ export default function Home() {
 
       <h1 className={styles.heading}>Inventory Management System</h1>
 
-      <h2 className={styles.subHeading}>Find Items</h2>
+      <h2 className={styles.subHeading}>Search for Items</h2>
       <div className={styles.formContainer}>
         <input
           type="text"
@@ -221,8 +221,7 @@ export default function Home() {
       {item && (
         <div className={styles.itemDetails} style={{ marginLeft: "402px" }}>
           <p>
-            {item.item_name.toUpperCase()} with ID:{item.item_id} has not been
-            issued to anyone.
+            Item Name: {item.item_name.toUpperCase()}, Item ID: {item.item_id}, Availability: {item.available}, Total Quantity: {item.total_quantity}
           </p>
         </div>
       )}

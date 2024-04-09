@@ -29,12 +29,12 @@ def fetch_item_by_name(item_name: str):
     item = db.session.query(Item).filter(Item.item_name == item_name).first()
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found in database.")
-    elif item.status == True:
+    elif item.available == 0:
         order_id = item.order_id
         order = db.session.query(Order).filter(Order.id == order_id).first()
-        raise HTTPException(status_code=404, detail=f"Item already issued to {order.student_name} (ID: {order.student_id}) on {order.issue_date}")
+        raise HTTPException(status_code=404, detail=f"Item not available for order!")
     else:
-        return {"item_id": item.item_id, "item_name": item.item_name, "status": "Not issued to anyone."}
+        return {"item_id": item.item_id, "item_name": item.item_name, "available": item.available, "total_quantity": item.total_quantity}
 
 @router.get("/fetch_all_left_items")
 def fetch_all_left_items():
