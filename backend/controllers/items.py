@@ -17,6 +17,10 @@ class UpdateItem(BaseModel):
     new_item_name: str
     new_total_quantity: int
 
+class DeleteItem(BaseModel):
+    item_id: str
+    item_name: str
+
 @router.post("/create_item")
 def add_item(item_data:ItemData):
     item = Item(item_id=item_data.item_id, item_name=item_data.item_name, status=False, order_id="-1", total_quantity=item_data.total_quantity, available=item_data.total_quantity)
@@ -61,7 +65,7 @@ def update_item(data: UpdateItem):
         return {"message": "Item updated successfully"}
 
 @router.post("/delete_item")
-def delete_item(data: ItemData):
+def delete_item(data: DeleteItem):
     item = db.session.query(Item).filter(Item.item_id == data.item_id, Item.item_name==data.item_name).first()
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
