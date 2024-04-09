@@ -10,14 +10,16 @@ router = APIRouter()
 class ItemData(BaseModel):
     item_id: str
     item_name: str
+    total_quantity: int
 
 class UpdateItem(BaseModel):
     old_item_name: str
     new_item_name: str
+    new_total_quantity: int
 
 @router.post("/create_item")
 def add_item(item_data:ItemData):
-    item = Item(item_id=item_data.item_id, item_name=item_data.item_name, status=False, order_id="-1")
+    item = Item(item_id=item_data.item_id, item_name=item_data.item_name, status=False, order_id="-1", total_quantity=item_data.total_quantity, available=item_data.total_quantity)
     db.session.add(item)
     db.session.commit()
     return {"message": "Item created successfully"}
@@ -53,6 +55,8 @@ def update_item(data: UpdateItem):
         raise HTTPException(status_code=404, detail="Item not found")
     else:
         item.item_name = data.new_item_name
+        item.total_quantity = data.new_total_quantity
+        item.available = data.new_total_quantity
         db.session.commit()
         return {"message": "Item updated successfully"}
 

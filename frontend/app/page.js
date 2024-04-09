@@ -29,9 +29,11 @@ export default function Home() {
 
   const [itemName, setItemName] = useState("");
   const [itemId, setItemId] = useState("");
+  const [totalQuantity, setTotalQuantity] = useState("");
 
   const [oldItemName, setOldItemName] = useState("");
   const [newItemName, setNewItemName] = useState("");
+  const [newItemQuantity, setNewItemQuantity] = useState("");
 
   const [deleteItemID, setDeleteItemID] = useState("");
   const [deleteItemName, setDeleteItemName] = useState("");
@@ -65,6 +67,7 @@ export default function Home() {
       const data = {
         old_item_name: oldItemName,
         new_item_name: newItemName,
+        new_total_quantity: newItemQuantity,
       };
       await updateItem(data);
       setNotificationMessage("Item updated successfully!");
@@ -78,6 +81,7 @@ export default function Home() {
     }
     setOldItemName("");
     setNewItemName("");
+    setNewItemQuantity("");
     setTimeout(() => {
       setNotificationVisible(false);
       setNotificationMessage("");
@@ -89,6 +93,7 @@ export default function Home() {
       const data = {
         item_name: itemName,
         item_id: itemId,
+        total_quantity: totalQuantity,
       };
       console.log(data);
       await createItem(data);
@@ -103,6 +108,7 @@ export default function Home() {
     }
     setItemName("");
     setItemId("");
+    setTotalQuantity("");
     setTimeout(() => {
       setNotificationVisible(false);
       setNotificationMessage("");
@@ -213,7 +219,7 @@ export default function Home() {
       </div>
       {error && <p className={styles.errorMessage}>{error}</p>}
       {item && (
-        <div className={styles.itemDetails}>
+        <div className={styles.itemDetails} style={{ marginLeft: "402px" }}>
           <p>
             {item.item_name.toUpperCase()} with ID:{item.item_id} has not been
             issued to anyone.
@@ -305,7 +311,7 @@ export default function Home() {
           type="text"
           className={styles.searchInput}
           placeholder="Enter Item ID"
-          style={{ marginRight: "10px" }}
+          style={{ marginRight: "5px" }}
           value={itemId}
           onChange={(e) => setItemId(e.target.value)}
         />
@@ -313,8 +319,16 @@ export default function Home() {
           type="text"
           className={styles.searchInput}
           placeholder="Enter Item Name"
+          style={{ marginRight: "5px" }}
           value={itemName}
           onChange={(e) => setItemName(e.target.value)}
+        />
+        <input
+          type="text"
+          className={styles.searchInput}
+          placeholder="Enter Item Quantity"
+          value={totalQuantity}
+          onChange={(e) => setTotalQuantity(e.target.value)}
         />
         <div className={styles.buttonContainer}>
           <button
@@ -336,16 +350,24 @@ export default function Home() {
           type="text"
           className={styles.searchInput}
           placeholder="Enter new name of the item..."
-          style={{ marginRight: "10px" }}
+          style={{ marginRight: "5px" }}
           value={newItemName}
           onChange={(e) => setNewItemName(e.target.value)}
         />
         <input
           type="text"
           className={styles.searchInput}
+          style={{ marginRight: "5px" }}
           placeholder="Enter old name of the item..."
           value={oldItemName}
           onChange={(e) => setOldItemName(e.target.value)}
+        />
+        <input
+          type="text"
+          className={styles.searchInput}
+          placeholder="Enter new quantit of the item..."
+          value={newItemQuantity}
+          onChange={(e) => setNewItemQuantity(e.target.value)}
         />
         <div className={styles.buttonContainer}>
           <button

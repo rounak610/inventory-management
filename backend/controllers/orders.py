@@ -21,10 +21,10 @@ def issue_item(data: OrdersData):
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found in database.")
     else:
-        if item.status == True:
+        if item.available == 0:
             order_id = item.order_id
             order = db.session.query(Order).filter(Order.id == order_id).first()
-            raise HTTPException(status_code=408, detail=f"Item already issued to {order.student_name} (ID: {order.student_id}) on {order.issue_date}")
+            raise HTTPException(status_code=408, detail=f"Item not available!")
         else:
             order = Order(item_id=item.item_id, student_id=data.student_id, student_name=data.student_name, issue_date=datetime.now())
             db.session.add(order)
@@ -32,6 +32,7 @@ def issue_item(data: OrdersData):
 
             item.status = True
             item.order_id = order.id
+            item.available -= 1
             db.session.commit()
             return {"message": "Item issued successfully"}
         
@@ -41,15 +42,13 @@ def return_item(data: OrdersData):
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
     else:
-        if item.status == False:
-            raise HTTPException(status_code=404, detail="Item already in stock")
-        else:
-            order_id = item.order_id
-            order = db.session.query(Order).filter(Order.id == order_id).first()
-            if order.student_id != data.student_id or order.student_name != data.student_name:
-                raise HTTPException(status_code=404, detail="Item not issued to this student")
-            order.return_date = datetime.now()
-            item.status = False
-            item.order_id = "-1"
-            db.session.commit()
-            return {"message": "Item returned successfully"}
+        order_id = item.order_id
+        order = db.session.query(Order).filter(Order.id == order_id).first()
+        if order.student_id != data.student_id or order.student_name != data.student_name:
+            raise HTTPException(status_code=404, detail="Item not issued to this student")
+        order.return_date = datetime.now()
+        item.status = False
+        item.order_id = "-1"
+        item.available += 1
+        db.session.commit()
+        return {"message": "Item returned successfully"}

@@ -110,7 +110,7 @@
   flex-direction: column;
   align-items: flex-start;
   min-height: 100vh;
-  background-color: #726A6A;
+  background-color: #36454f;
 }
 
 .heading {
@@ -195,8 +195,8 @@
 .itemDetails {
   margin-top: 20px;
   padding: 10px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  background-color: black;
+  border: 1px solid;
   border-radius: 4px;
   width: 100%;
   max-width: 600px; /* Adjust the maximum width as needed */

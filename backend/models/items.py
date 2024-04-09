@@ -9,3 +9,5 @@ class Item(DBBaseModel):
     item_name = Column(String)
     status = Column(Boolean)
     order_id = Column(String)
+    total_quantity = Column(Integer)
+    available = Column(Integer)
