@@ -3,3 +3,4 @@ fastapi==0.110.0
 starlette==0.36.3
 fastapi-sqlalchemy==0.2.1
 psycopg2==2.9.9
+alembic
